@@ -19,7 +19,7 @@ IUSE="+alt-ergo +coq gtk +ocamlopt test +why3"
 DEPEND=">=dev-lang/ocaml-4.02.3[ocamlopt?]
         >=dev-ml/findlib-1.6.1[ocamlopt?]
         >=dev-ml/ocamlgraph-1.8.8[gtk?,ocamlopt?]
-        dev-ml/zarith
+        dev-ml/zarith[ocamlopt?]
         gtk? (
         	dev-ml/lablgtk[sourceview,gnomecanvas,ocamlopt?]
         	gnome-base/libgnomecanvas
