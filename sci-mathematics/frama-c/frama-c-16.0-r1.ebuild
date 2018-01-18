@@ -20,6 +20,8 @@ DEPEND=">=dev-lang/ocaml-4.02.3[ocamlopt?]
         >=dev-ml/findlib-1.6.1[ocamlopt?]
         >=dev-ml/ocamlgraph-1.8.8[gtk?,ocamlopt?]
         dev-ml/zarith[ocamlopt?]
+        alt-ergo? ( sci-mathematics/alt-ergo[gtk?,ocamlopt?] )
+        coq? ( sci-mathematics/coq[gtk?,ocamlopt?] )
         gtk? (
         	dev-ml/lablgtk[sourceview,gnomecanvas,ocamlopt?]
         	gnome-base/libgnomecanvas
@@ -28,15 +30,10 @@ DEPEND=">=dev-lang/ocaml-4.02.3[ocamlopt?]
         test? ( sys-process/time )"
 
 RDEPEND="alt-ergo? ( sci-mathematics/alt-ergo[gtk?,ocamlopt?] )
-         coq?      ( sci-mathematics/coq[gtk?,ocamlopt?] )
-         why3?     ( sci-mathematics/why3-for-spark[coq?,gtk?,ocamlopt?,zarith] )"
+         coq? ( sci-mathematics/coq[gtk?,ocamlopt?] )
+         why3? ( sci-mathematics/why3-for-spark[coq?,gtk?,ocamlopt?,zarith] )"
 
-src_prepare() {
-	default
-	find "${FILESDIR}/${PN}/${PV}" -type f -name "*.diff" | while read patchfile; do
-		eapply "${patchfile}"
-	done
-}
+PATCHES=( "${FILESDIR}/${PV}/missing-braces.diff" )
 
 src_configure() {
 	if use gtk; then
