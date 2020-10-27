@@ -13,14 +13,17 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND=">=sys-devel/make-4"
-RDEPEND="${DEPEND}"
-BDEPEND="${DEPEND}"
+DEPEND=""
+BDEPEND=">=sys-devel/make-4"
+RDEPEND="${BDEPEND}
+        >=app-text/asciidoc-9.0.2
+        >=app-text/dblatex-0.3.11
+        >=dev-libs/libxslt-1.1.34"
 
 S="${WORKDIR}/${ERL_MK}-${PV}"
 
 src_compile() {
-	make
+	emake
 }
 
 src_install() {
