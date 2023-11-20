@@ -25,13 +25,17 @@ DEPEND="sys-devel/llvm"
 RDEPEND="${DEPEND}"
 BDEPEND="test? ( ${PYTHON_DEPS} )"
 
-PATCHES=(
-	"${FILESDIR}/CMakeLists.diff"
-)
-
 src_unpack () {
 	git-r3_src_unpack
 }
+
+src_configure () (
+	mycmakeargs=(
+		-DCMAKE_BUILD_WITH_INSTALL_RPATH=TRUE
+		-DC3_LINK_DYNAMIC=TRUE
+	)
+	cmake_src_configure
+)
 
 src_test () (
 	C3C=$(realpath --canonicalize-existing --relative-to="${PWD}" "${BUILD_DIR}/c3c")
