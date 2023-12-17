@@ -1,0 +1,23 @@
+--- notcurses-3.0.9/CMakeLists.txt
++++ notcurses-3.0.9/CMakeLists.txt
+@@ -218,6 +218,7 @@ file(GLOB NCCORESRCS CONFIGURE_DEPENDS src/lib/*.c)
+ add_library(notcurses-core SHARED ${NCCORESRCS} ${COMPATSRC})
+ if(${USE_STATIC})
+ add_library(notcurses-core-static STATIC ${NCCORESRCS} ${COMPATSRC})
++target_compile_definitions(notcurses-core-static PRIVATE STATIC_LIB)
+ else()
+ add_library(notcurses-core-static STATIC EXCLUDE_FROM_ALL ${NCCORESRCS} ${COMPATSRC})
+ endif()
+--- notcurses-3.0.9/src/lib/util.c
++++ notcurses-3.0.9/src/lib/util.c
+@@ -33,7 +33,9 @@ int set_loglevel_from_env(ncloglevel_e* llptr){
+ }
+ 
+ char* notcurses_accountname(void){
+-#ifndef __MINGW32__
++#ifdef STATIC_LIB
++  return NULL;
++#elif !defined(__MINGW32__)
+   const char* un;
+   if( (un = getenv("LOGNAME")) ){
+     return strdup(un);
