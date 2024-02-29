@@ -19,7 +19,7 @@ LICENSE="
 	MIT
 "
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE="debug static"
 
 BDEPEND=">=dev-lang/go-1.20"
