@@ -1,0 +1,11 @@
+--- fmt-pe-0.20230416/examples/x86/include/format/pe.inc.orig	0000-00-00 00:00:00.000000000 +0000
++++ fmt-pe-0.20230416/examples/x86/include/format/pe.inc	2023-05-06 07:22:32.695780986 +0000
+@@ -292,7 +292,7 @@
+ 
+ 		namespace Stub
+ 
+-		      include '../8086.inc'
++		      include '../xpu/8086.inc'
+ 
+ 		start:
+ 		      push    cs
