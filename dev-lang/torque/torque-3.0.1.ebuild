@@ -35,7 +35,7 @@ BENBRIDLE_CRATES=(
 )
 
 for crate in "${!BENBRIDLE_CRATES[@]}"; do
-	if read -r name versions <<< "${BENBRIDLE_CRATES[${crate}]}"; then
+	if read -r name versions < <("${BENBRIDLE_CRATES[${crate}]}"); then
 		for version in ${versions}; do
 			CARGO_CRATE_URIS+=" https://code.benbridle.com/${name}/snapshot/${name}-${version}.zip"
 		done
