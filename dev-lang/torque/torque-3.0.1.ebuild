@@ -35,7 +35,7 @@ BENBRIDLE_CRATES=(
 )
 
 for crate in "${!BENBRIDLE_CRATES[@]}"; do
-	if read -r name versions < <("${BENBRIDLE_CRATES[${crate}]}"); then
+	if read -r name versions < <(echo "${BENBRIDLE_CRATES[${crate}]}"); then
 		for version in ${versions}; do
 			CARGO_CRATE_URIS+=" https://code.benbridle.com/${name}/snapshot/${name}-${version}.zip"
 		done
@@ -61,7 +61,7 @@ src_unpack() {
 	cargo_src_unpack
 
 	for crate in "${!BENBRIDLE_CRATES[@]}"; do
-		if read -r name versions <<< "${BENBRIDLE_CRATES[${crate}]}"; then
+		if read -r name versions < <(echo "${BENBRIDLE_CRATES[${crate}]}"); then
 			printf -- "[patch.'git://benbridle.com/%s']\n" "${name}"
 			for version in ${versions}; do
 				printf -- '"%s:%s" = { path = "%s", package = "%s", version = "%s" }\n' "${name}" "${version}" "${WORKDIR}/${name}-${version}" "${name}" "${version}"
